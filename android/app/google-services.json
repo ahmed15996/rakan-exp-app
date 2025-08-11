@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "601470779005",
+    "project_id": "rakanapp-5c6ad",
+    "storage_bucket": "rakanapp-5c6ad.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:601470779005:android:cfcb526d9440f84607fb14",
+        "android_client_info": {
+          "package_name": "com.rakaan.rakaan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxEGLaOQYgAea7gmKZptukkLdmlz1DmRc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
