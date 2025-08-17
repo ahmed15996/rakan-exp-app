@@ -137,6 +137,8 @@ class EditProfileCubit extends Cubit<EditProfileState> {
   /// edit profile
   void editProfile({required BuildContext context}) async {
     emit(EditProfileLoading());
+    print( carModel?.id.toString());
+    print( pref.getData(key: AppCached.carId));
     String fcmToken = await AppFirebase().getFirebaseToken() ?? "";
     var result = await repository.editProfile(
       param: RegisterParam(
@@ -145,7 +147,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
           dateBirth: "",
           img: image,
           idNumber: "",
-          carId: carModel?.id.toString(),
+          carId: carModel?.id.toString()??pref.getData(key: AppCached.carId),
           phone: phoneCtrl.text,
           cityId: cityModel?.id.toString(),
           email: phoneCtrl.text,
@@ -172,7 +174,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
         phone: authRepository.authModel?.user?.phone,
         cityId: authRepository.authModel?.user?.city.id.toString(),
         cityName: authRepository.authModel?.user?.city.name,
-        id: authRepository.authModel?.user?.id.toString()??"",
+        id: authRepository.authModel?.user?.id.toString() ?? "",
         carId: authRepository.authModel?.user?.city.id.toString(),
         carName: authRepository.authModel?.user?.car.name.toString(),
         email: authRepository.authModel?.user?.email,

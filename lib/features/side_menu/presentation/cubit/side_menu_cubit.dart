@@ -34,6 +34,7 @@ class SideMenuCubit extends Cubit<SideMenuState> {
       emit(LogoutFailed(msg: failure.message));
     }, (msg) async {
       await pref.clearData(AppCached.token);
+
       context.pushAndRemoveUntilWithNamed(Routes.loginView);
       emit(LogoutSuccess(msg: msg));
     });

@@ -47,8 +47,9 @@ class TripDetailsCubit extends Cubit<TripDetailsState> {
       emit(TripDetailsFailed(msg: failure.message));
     }, (data) {
       model = data;
-
-      getPolylinePoints();
+if(model?.clint?.lng!=null&&model?.clint?.lat!=null){
+  getPolylinePoints();
+}
       emit(TripDetailsSuccess());
     });
   }

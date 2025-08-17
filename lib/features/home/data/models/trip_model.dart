@@ -11,7 +11,7 @@ class TripModel {
   @JsonKey(name: 'code')
   final int? code;
   @JsonKey(name: 'delivery')
-  final int? delivery;
+  final String delivery;
   @JsonKey(name: 'status')
   final StaticModel? status;
   @JsonKey(name: 'payment')
@@ -29,7 +29,7 @@ class TripModel {
   @JsonKey(name: 'items_count')
   final num? itemsCount;
   @JsonKey(name: 'isOpen')
-   bool? isOpen;
+  bool? isOpen;
 
   factory TripModel.fromJson(Map<String, dynamic> json) => _$TripModelFromJson(json);
 

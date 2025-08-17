@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,6 +12,7 @@ import 'package:rakaan/features/home/presentation/cubit/home_cubit.dart';
 import 'package:rakaan/features/home/presentation/view/widgets/custom_home_app_bar.dart';
 import 'package:rakaan/features/home/presentation/view/widgets/custom_home_list.dart';
 import 'package:rakaan/features/home/presentation/view/widgets/custom_search_for_orders.dart';
+import 'package:rakaan/generated/locale_keys.g.dart';
 
 import '../../../side_menu/presentation/view/custom_side_menu.dart';
 
@@ -92,13 +94,14 @@ class _HomeViewState extends State<HomeView> {
                                 if (state is UpdateLocationFailed)
                                   SizedBox(
                                       height: 200.h,
-                                      child: Icon(Icons.refresh, size: 80.r, color: AppColors.hintColor)
-                                          .onTapShadow(borderRadius: BorderRadius.circular(8.r), function: ()async {
-                                     await   cubit.checkPermission();
-                                      })),
-                                if (cubit.haveTrip && (cubit.model?.offers.isNotEmpty ?? false)) CustomHomeList(cubit: cubit),
-                                if (cubit.haveTrip && (cubit.model?.offers.isEmpty ?? false))
-                                  CustomEmptyData(image: AppAssets.notifications, text: "empty data"),
+                                      child: Icon(Icons.refresh, size: 80.r, color: AppColors.hintColor).onTapShadow(
+                                          borderRadius: BorderRadius.circular(8.r),
+                                          function: () async {
+                                           await  cubit.updateLocation();
+                                          })),
+                                if (cubit.haveTrip && (cubit.model?.offers?.isNotEmpty ?? false)) CustomHomeList(cubit: cubit),
+                                if (cubit.haveTrip && (cubit.model?.offers?.isEmpty ?? false))
+                                  CustomEmptyData(image: AppAssets.notifications, text: LocaleKeys.emptyHome.tr()),
                                 if (!cubit.haveTrip && state is! UpdateLocationFailed) CustomSearchForOrders()
                               ],
                             ),

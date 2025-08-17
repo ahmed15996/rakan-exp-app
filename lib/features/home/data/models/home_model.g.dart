@@ -12,7 +12,7 @@ HomeModel _$HomeModelFromJson(Map<String, dynamic> json) => HomeModel(
       accepted: json['accepted'] as num?,
       ordersCount: json['orders_count'] as num?,
       seconds: json['seconds'] as num?,
-      offers: (json['offers'] as List<dynamic>)
-          .map((e) => TripModel.fromJson(e as Map<String, dynamic>))
+      offers: (json['offers'] as List<dynamic>?)
+          ?.map((e) => TripModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );

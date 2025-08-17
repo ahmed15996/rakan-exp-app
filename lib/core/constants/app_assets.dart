@@ -10,6 +10,7 @@ class AppAssets {
   static const String onBoardingThree = "$_iconsPath/onboard_test.jpg";
   static const String onboardingBtn = "$_iconsPath/onboarding_btn.svg";
   static const String sideMenu = "$_iconsPath/side_menu.svg";
+  static const String notify = "$_iconsPath/notify.svg";
   static const String market = "$_iconsPath/market.svg";
   static const String filter = "$_iconsPath/filter.svg";
   static const String headphone = "$_iconsPath/headphone.svg";
@@ -34,6 +35,7 @@ class AppAssets {
   static const String mapImg = "$_iconsPath/map_img.png";
   static const String ordersCount = "$_iconsPath/orders_count.svg";
   static const String walletCount = "$_iconsPath/wallet_count.svg";
+  static const String registerSuccess = "$_iconsPath/register_sheet.svg";
 
 
   /// Change This

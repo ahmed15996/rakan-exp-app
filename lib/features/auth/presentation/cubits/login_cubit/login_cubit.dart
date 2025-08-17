@@ -101,7 +101,7 @@ class LoginCubit extends Cubit<LoginState> {
 
   void login({required BuildContext context}) async {
     emit(LoginLoading());
-    String fcmToken = await AppFirebase().getFirebaseToken()?? "";
+    String fcmToken = await AppFirebase().getFirebaseToken() ?? "";
     var result = await repository.login(
       param: LoginParam(phone: phoneCtrl.text, deviceToken: fcmToken),
     );
@@ -111,9 +111,9 @@ class LoginCubit extends Cubit<LoginState> {
         emit(LoginFailure());
       },
       (authModel) {
-        if ((authModel.authModel?.isAvailable??false)&&!(authModel.authModel?.isBending??false)) {
+        if (authModel.authModel?.isBending ?? false) {
           showToast(
-            text: authModel.message??"",
+            text: authModel.message ?? "",
             state: ToastStates.success,
           );
 
@@ -125,10 +125,9 @@ class LoginCubit extends Cubit<LoginState> {
             ),
           );
           emit(LoginSuccess());
-        }
-        else {
+        } else {
           showToast(
-            text: authModel.message??"",
+            text: authModel.message ?? "",
             state: ToastStates.success,
           );
 
@@ -151,7 +150,7 @@ class LoginCubit extends Cubit<LoginState> {
       cityName: authModel.authModel?.user?.city.name,
       cityId: authModel.authModel?.user?.city.id.toString(),
       token: authModel.authModel!.token!,
-      id: authModel.authModel?.user?.id.toString()??"",
+      id: authModel.authModel?.user?.id.toString() ?? "",
     );
     result.fold(
       (failure) {
@@ -160,7 +159,7 @@ class LoginCubit extends Cubit<LoginState> {
       },
       (r) {
         showToast(
-          text: authModel.message??"",
+          text: authModel.message ?? "",
           state: ToastStates.success,
         );
 

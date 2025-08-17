@@ -14,9 +14,9 @@ class CustomHomeList extends StatelessWidget {
     return Column(
       spacing: 24.h,
       children: List.generate(
-          cubit.model?.offers.length ?? 0,
+          cubit.model?.offers?.length ?? 0,
           (index) => CustomHomeItem(
-                model: cubit.model!.offers[index],
+                model: cubit.model!.offers![index],
                 time: cubit.model!.seconds?.toInt() ?? 20,
               )),
     ).withPadding(top: 24.h);

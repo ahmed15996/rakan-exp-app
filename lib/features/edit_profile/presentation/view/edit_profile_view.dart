@@ -6,6 +6,7 @@ import 'package:rakaan/core/constants/app_colors.dart';
 import 'package:rakaan/core/util/extensions/navigation.dart';
 import 'package:rakaan/core/widgets/custom_app_bar.dart';
 import 'package:rakaan/core/widgets/custom_button.dart';
+import 'package:rakaan/core/widgets/custom_toast.dart';
 import 'package:rakaan/features/edit_profile/presentation/view/widgets/custom_edit_profile_car.dart';
 import 'package:rakaan/features/edit_profile/presentation/view/widgets/custom_edit_profile_person.dart';
 import 'package:rakaan/generated/locale_keys.g.dart';
@@ -52,7 +53,11 @@ class EditProfileView extends StatelessWidget {
                             isLoading: state is EditProfileLoading,
                             text: LocaleKeys.save.tr(),
                             onPressed: () {
-                              cubit.editProfile(context: context);
+                              if (cubit.cityModel != null) {
+                                cubit.editProfile(context: context);
+                              } else {
+                                showToast(text: LocaleKeys.selectCarFirst.tr(), state: ToastStates.error);
+                              }
                             },
                           ),
                         ),

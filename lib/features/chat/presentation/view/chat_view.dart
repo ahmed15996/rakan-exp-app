@@ -28,31 +28,30 @@ class ChatView extends StatelessWidget {
               CustomAppBar(title: LocaleKeys.customerService.tr()),
               state is GetChatFailed
                   ? Expanded(
-                  child: CustomError(
-                    error: state.msg,
-                    retry: () => cubit.getData(),
-                  ).withPadding(horizontal: 24.w))
+                      child: CustomError(
+                      error: state.msg,
+                      retry: () => cubit.getData(),
+                    ).withPadding(horizontal: 24.w))
                   : state is GetChatLoading || state is ChatInitial
-                  ? Expanded(
-                child: SizedBox(),
-              )
-                  : Expanded(
-                  child: ListView.builder(
-                      reverse: true,
-                      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
-                      itemCount: cubit.list.length ?? 0,
-                      itemBuilder: (context, index) =>
-                          CustomChatItem(img: (cubit.list[index].type != "user" ? cubit.list[index].admin?.img:cubit.list[index].user?.img)??"",
-                              msg: cubit.list[index].message, fromSender: cubit.list[index].type != "user" ? true : false)))
+                      ? Expanded(
+                          child: SizedBox(),
+                        )
+                      : Expanded(
+                          child: ListView.builder(
+                              reverse: true,
+                              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
+                              itemCount: cubit.list.length ?? 0,
+                              itemBuilder: (context, index) => CustomChatItem(
+                                  img:
+                                      (cubit.list[index].type != "user" ? cubit.list[index].admin?.img : cubit.list[index].user?.img) ?? "",
+                                  msg: cubit.list[index].message,
+                                  fromSender: cubit.list[index].type != "user" ? true : false)))
             ],
           ),
           bottomNavigationBar: Container(
             color: AppColors.whiteColor,
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
-            margin: EdgeInsets.only(bottom: MediaQuery
-                .of(context)
-                .viewInsets
-                .bottom),
+            margin: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
             child: Row(
               children: [
                 Expanded(
@@ -62,17 +61,17 @@ class ChatView extends StatelessWidget {
                         backGroundColor: AppColors.whiteLightColor,
                         ctrl: cubit.msgController)),
                 Container(
-                    padding: EdgeInsets.all(12.r),
-                    decoration: BoxDecoration(color: AppColors.whiteColor, borderRadius: BorderRadius.circular(12.r)),
-                    child: Icon(Icons.send, color: AppColors.primaryColor, size: 24.r))
+                        padding: EdgeInsets.all(12.r),
+                        decoration: BoxDecoration(color: AppColors.whiteColor, borderRadius: BorderRadius.circular(12.r)),
+                        child: Icon(Icons.send, color: AppColors.primaryColor, size: 24.r))
                     .withPadding(start: 8.w)
                     .onTapShadow(
-                    borderRadius: BorderRadius.circular(8.r),
-                    function: () {
-                      if (cubit.msgController.text.isNotEmpty) {
-                        cubit.sendMsg(param: ChatParam(message: cubit.msgController.text));
-                      }
-                    })
+                        borderRadius: BorderRadius.circular(8.r),
+                        function: () {
+                          if (cubit.msgController.text.isNotEmpty) {
+                            cubit.sendMsg(param: ChatParam(message: cubit.msgController.text));
+                          }
+                        })
               ],
             ),
           ),

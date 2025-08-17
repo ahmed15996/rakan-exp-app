@@ -10,7 +10,7 @@ class FullScreenImageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black, // خلفية سوداء
+      backgroundColor: Colors.black,
       body: Stack(
         children: [
           Positioned.fill(

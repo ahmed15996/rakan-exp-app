@@ -61,10 +61,10 @@ class NotificationsView extends StatelessWidget {
                                     (index) => CustomNotificationItem(
                                           model: state is NotificationsLoading || state is NotificationsInitial
                                               ? NotificationModel(
-                                                  id: "id",
+                                                  id: 0,
                                                   title: "لديك طلب توصيل جديد",
                                                   message: "لديك طلب توصيل جديد",
-                                                  image: AppAssets.test,
+
                                                   createdAt: "9.56 AM")
                                               : cubit.list[index],
                                         )),

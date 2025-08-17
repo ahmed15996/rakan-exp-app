@@ -40,11 +40,12 @@ class _TripDetailsViewState extends State<TripDetailsView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TripDetailsCubit, TripDetailsState>(
-      builder: (context, state) {
-        final cubit = BlocProvider.of<TripDetailsCubit>(context);
-        return Scaffold(
-          body: Stack(
+    return Scaffold(
+      body: BlocBuilder<TripDetailsCubit, TripDetailsState>(
+        builder: (context, state) {
+          final cubit = BlocProvider.of<TripDetailsCubit>(context);
+
+          return Stack(
             children: [
               SizedBox(
                   width: double.infinity,
@@ -70,6 +71,17 @@ class _TripDetailsViewState extends State<TripDetailsView> {
                     compassEnabled: false,
                     polylines: cubit.polyLines,
                   )),
+              state is TripDetailsFailed
+                  ? SizedBox(
+                height: 500.h,
+                child: CustomError(error: state.msg, retry: () => cubit.getTrip(id: widget.arguments.id))
+                    .withPadding(vertical: 48.h, top: 40.h),
+              )
+                  : state is TripDetailsLoading || state is TripDetailsInitial
+                  ? SizedBox(height: 32.r, width: 32.r, child: CircularProgressIndicator(color: AppColors.secondaryColor))
+                  .withPadding(vertical: 48.h, top: 40.h)
+                  .center
+                  :
               Column(
                 children: [
                   Expanded(
@@ -87,14 +99,7 @@ class _TripDetailsViewState extends State<TripDetailsView> {
                           child: SingleChildScrollView(
                             controller: scrollController,
                             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
-                            child: state is TripDetailsFailed
-                                ? CustomError(error: state.msg, retry: () => cubit.getTrip(id: widget.arguments.id))
-                                    .withPadding(vertical: 48.h, top: 40.h)
-                                : state is TripDetailsLoading || state is TripDetailsInitial
-                                    ? SizedBox(height: 32.r, width: 32.r, child: CircularProgressIndicator(color: AppColors.secondaryColor))
-                                        .withPadding(vertical: 48.h, top: 40.h)
-                                        .center
-                                    : Column(
+                            child: Column(
                                         children: [
                                           Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -171,7 +176,7 @@ class _TripDetailsViewState extends State<TripDetailsView> {
                                           CustomButton(
                                             text: LocaleKeys.deliveryStarted.tr(),
                                             onPressed: () {
-                                              if(cubit.model!=null){
+                                              if (cubit.model != null) {
                                                 context.pushWithNamed(Routes.orderStatusView,
                                                     arguments: OrderStatusArguments(model: cubit.model!));
                                               }
@@ -187,9 +192,9 @@ class _TripDetailsViewState extends State<TripDetailsView> {
                 ],
               )
             ],
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

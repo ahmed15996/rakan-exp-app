@@ -5,15 +5,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rakaan/core/constants/app_assets.dart';
 import 'package:rakaan/core/constants/app_colors.dart';
 import 'package:rakaan/core/constants/app_text_styles.dart';
-import 'package:rakaan/core/util/extensions/navigation.dart';
 import 'package:rakaan/core/util/extensions/on_tap.dart';
 import 'package:rakaan/core/util/extensions/padding.dart';
-import 'package:rakaan/core/util/routing/routes.dart';
 import 'package:rakaan/features/home/data/models/trip_model.dart';
-import 'package:rakaan/features/trip_details/data/arguments/trip_details_arguments.dart';
 import 'package:rakaan/generated/locale_keys.g.dart';
 
 import 'custom_delivery_item.dart';
+import 'custom_timer_widget.dart';
 
 class CustomHomeItem extends StatefulWidget {
   const CustomHomeItem({super.key, required this.model, required this.time});
@@ -35,13 +33,14 @@ class _CustomHomeItemState extends State<CustomHomeItem> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
             children: [
               Column(
                 children: [
                   Row(
                     children: [
-                      Text(widget.model.delivery.toString(), style: AppTextStyles.textStyle32.copyWith(fontWeight: FontWeight.w700, color: AppColors.blackColor)),
+                      Text(widget.model.delivery.toString(),
+                          style: AppTextStyles.textStyle32.copyWith(fontWeight: FontWeight.w700, color: AppColors.blackColor)),
                       SvgPicture.asset(AppAssets.sar, width: 48.r, height: 48.r)
                     ],
                   ),
@@ -49,22 +48,7 @@ class _CustomHomeItemState extends State<CustomHomeItem> {
                       style: AppTextStyles.textStyle12.copyWith(fontWeight: FontWeight.w500, color: AppColors.grayTextColor))
                 ],
               ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-                decoration: BoxDecoration(color: AppColors.primaryColor, borderRadius: BorderRadius.circular(16.r)),
-                child: Column(
-                  children: [
-                    Text(LocaleKeys.acceptOrder.tr(),
-                            style: AppTextStyles.textStyle12.copyWith(fontWeight: FontWeight.w600, color: AppColors.whiteColor))
-                        .withPadding(bottom: 2.h),
-                    Text("${widget.time} ${LocaleKeys.seconds.tr()}",
-                        style: AppTextStyles.textStyle12.copyWith(fontWeight: FontWeight.w600, color: AppColors.secondaryColor))
-                  ],
-                ),
-              ).onTapShadow(
-                  borderRadius: BorderRadius.circular(8.r),
-                  function: () =>
-                      context.pushWithNamed(Routes.tripDetailsView, arguments: TripDetailsArguments(id: widget.model.id.toString(),second:widget.time )))
+              Flexible(child: CustomTimerWidget(model: widget.model, time: widget.time))
             ],
           ).withPadding(horizontal: 16.w),
           Divider(color: AppColors.whiteColor, thickness: 8.h, height: 28.h),

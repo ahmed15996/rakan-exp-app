@@ -8,9 +8,8 @@ part of 'notification_model.dart';
 
 NotificationModel _$NotificationModelFromJson(Map<String, dynamic> json) =>
     NotificationModel(
-      id: json['id'] as String,
+      id: (json['id'] as num).toInt(),
       title: json['title'] as String,
-      message: json['message'] as String?,
-      image: json['image'] as String,
+      message: json['desc'] as String?,
       createdAt: json['created_at'] as String?,
     );

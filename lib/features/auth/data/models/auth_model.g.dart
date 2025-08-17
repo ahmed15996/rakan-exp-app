@@ -9,7 +9,7 @@ part of 'auth_model.dart';
 AuthModel _$AuthModelFromJson(Map<String, dynamic> json) => AuthModel(
       isActive: json['is_active'] as bool?,
       isAvailable: json['is_available'] as bool?,
-      isBending: json['is_bending'] as bool?,
+      isBending: json['is_pending'] as bool?,
       user: json['user'] == null
           ? null
           : UserModel.fromJson(json['user'] as Map<String, dynamic>),

@@ -16,7 +16,7 @@ class HomeModel {
   @JsonKey(name: 'seconds')
   final num? seconds;
   @JsonKey(name: 'offers')
-  final List<TripModel> offers;
+  final List<TripModel>? offers;
 
   factory HomeModel.fromJson(Map<String, dynamic> json) => _$HomeModelFromJson(json);
 

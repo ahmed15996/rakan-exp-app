@@ -253,8 +253,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i663.OrderStatusRepository>(() =>
         _i14.OrderStatusRepositoryImpl(
             orderStatusDataSource: gh<_i74.OrderStatusDataSource>()));
-    gh.factory<_i650.HomeCubit>(
-        () => _i650.HomeCubit(gh<_i444.HomeRepository>()));
     gh.factory<_i312.StaticPageDataSource>(() =>
         _i1048.StaticPageDataSourceImpl(apiConsumer: gh<_i337.ApiConsumer>()));
     gh.factory<_i896.NotificationsRepository>(() =>
@@ -303,6 +301,10 @@ extension GetItInjectableX on _i174.GetIt {
         staticsDataSource: gh<_i343.StaticsDataSource>()));
     gh.factory<_i857.NotificationsCubit>(
         () => _i857.NotificationsCubit(gh<_i896.NotificationsRepository>()));
+    gh.factory<_i650.HomeCubit>(() => _i650.HomeCubit(
+          gh<_i444.HomeRepository>(),
+          gh<_i336.SharedPrefServices>(),
+        ));
     gh.factory<_i128.TripDetailsRepository>(() =>
         _i305.TripDetailsRepositoryImpl(
             tripDetailsDataSource: gh<_i306.TripDetailsDataSource>()));
@@ -310,11 +312,13 @@ extension GetItInjectableX on _i174.GetIt {
         _i436.FaqRepositoryImpl(faqDataSource: gh<_i377.FaqDataSource>()));
     gh.factory<_i171.LearnCubit>(
         () => _i171.LearnCubit(gh<_i24.LearnRepository>()));
+    gh.factory<_i453.ChatCubit>(() => _i453.ChatCubit(
+          gh<_i737.ChatRepository>(),
+          gh<_i336.SharedPrefServices>(),
+        ));
     gh.factory<_i791.ContactAndReportRepository>(() =>
         _i221.ContactAndReportRepositoryImpl(
             remoteDataSource: gh<_i955.ContactAndReportDataSource>()));
-    gh.factory<_i453.ChatCubit>(
-        () => _i453.ChatCubit(gh<_i737.ChatRepository>()));
     gh.factory<_i788.FaqCubit>(() => _i788.FaqCubit(gh<_i504.FaqRepository>()));
     gh.factory<_i417.WalletCubit>(() => _i417.WalletCubit(
           gh<_i933.WalletRepository>(),

@@ -156,5 +156,7 @@
   "reachRestaurant": "الوصول للمطعم",
   "attachStageImage": "أرفق صورة المرحلة",
   "customerService": "الدعم الفني",
-  "typeAMessage": "اكتب هنا..."
+  "typeAMessage": "اكتب هنا...",
+  "registerSuccess": "لقد تم تقديم طلبك بنجاح وسيتم مراجعته والرد عليك في أقرب وقت",
+  "emptyHome": "لا يوجد عروض"
 }

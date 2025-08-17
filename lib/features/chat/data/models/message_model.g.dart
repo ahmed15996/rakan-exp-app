@@ -8,12 +8,12 @@ part of 'message_model.dart';
 
 MessageModel _$MessageModelFromJson(Map<String, dynamic> json) => MessageModel(
       id: (json['id'] as num).toInt(),
-      user: json['user'] == null
+      user: json['sender'] == null
           ? null
-          : StaticModel.fromJson(json['user'] as Map<String, dynamic>),
-      admin: json['admin'] == null
+          : StaticModel.fromJson(json['sender'] as Map<String, dynamic>),
+      admin: json['receive'] == null
           ? null
-          : StaticModel.fromJson(json['admin'] as Map<String, dynamic>),
+          : StaticModel.fromJson(json['receive'] as Map<String, dynamic>),
       type: json['type'] as String,
       message: json['message'] as String,
     );

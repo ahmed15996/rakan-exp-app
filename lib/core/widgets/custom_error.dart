@@ -29,7 +29,7 @@ class CustomError extends StatelessWidget {
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SvgPicture.asset(
+              Image.asset(
                 AppAssets.authLogo,
                 height: context.height * 0.05,
                 width: context.width * 0.32,

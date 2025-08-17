@@ -72,7 +72,7 @@ class PinCodeCubit extends Cubit<PinCodeState> {
         cityId: authModel.user?.city.id.toString(),
         cityName: authModel.user?.city.name,
         id: authModel.user?.id.toString()??"" ,
-        carId:authModel.user?.city.id.toString() ,
+        carId:authModel.user?.car.id.toString() ,
         carName:authModel.user?.car.name.toString() ,
         email:authModel.user?.email ,
 

@@ -56,7 +56,7 @@ class SettingsRemoteDataSourceImpl extends SettingsRemoteDataSource {
       if (param.cityId != null) "city_id": param.cityId,
       if (param.img != null) "img": MultipartFile.fromFileSync(param.img!),
       if (param.deviceKey != null) "device_key": param.deviceKey,
-      if (param.carId != null) "car_id": param.carId,
+       "car_id": param.carId,
       if (param.licenceImg != null) "licence_img": MultipartFile.fromFileSync(param.licenceImg!),
       if (param.formImg != null) "form_img": MultipartFile.fromFileSync(param.formImg!),
       if (param.carImg != null) "car_img": MultipartFile.fromFileSync(param.carImg!)

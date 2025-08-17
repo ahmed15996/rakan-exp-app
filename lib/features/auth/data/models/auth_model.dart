@@ -10,7 +10,7 @@ class AuthModel {
 
   @JsonKey(name: 'is_available')
   final bool? isAvailable;
-  @JsonKey(name: 'is_bending')
+  @JsonKey(name: 'is_pending')
   final bool? isBending;
   @JsonKey(name: 'user')
   final UserModel? user;

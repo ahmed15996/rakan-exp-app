@@ -6,13 +6,10 @@ import 'package:country_code_picker_plus/country_code_picker_plus.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rakaan/core/models/static_model.dart';
-import 'package:rakaan/core/util/extensions/navigation.dart';
 import 'package:rakaan/core/widgets/custom_toast.dart';
 
 import '../../../../../../core/framework/app_firebase.dart';
 import '../../../../../../core/helpers/image_helper.dart';
-import '../../../../../core/util/routing/routes.dart';
-import '../../../data/arguments/pin_code_argument.dart';
 import '../../../data/params/register_param.dart';
 import '../../../data/repository/auth_repository.dart';
 
@@ -52,7 +49,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   selectStep() {
-    isFirstStep = false;
+    isFirstStep = !isFirstStep;
     emit(RegisterUpdate());
   }
 
@@ -183,15 +180,15 @@ class RegisterCubit extends Cubit<RegisterState> {
         emit(RegisterFailure());
       },
       (msg) {
-        context.pushReplacementWithNamed(
-          Routes.pinCodeView,
-          arguments: PinCodeArgument(
-            countryCode: countryCode.dialCode!,
-            phoneNumber: phoneCtrl.text,
-          ),
-        );
+        // context.pushReplacementWithNamed(
+        //   Routes.pinCodeView,
+        //   arguments: PinCodeArgument(
+        //     countryCode: countryCode.dialCode!,
+        //     phoneNumber: phoneCtrl.text,
+        //   ),
+        // );
 
-        emit(RegisterSuccess(msg: msg));
+        emit(RegisterSuccess());
       },
     );
   }

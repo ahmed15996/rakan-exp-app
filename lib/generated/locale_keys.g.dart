@@ -161,5 +161,7 @@ abstract class  LocaleKeys {
   static const attachStageImage = 'attachStageImage';
   static const customerService = 'customerService';
   static const typeAMessage = 'typeAMessage';
+  static const registerSuccess = 'registerSuccess';
+  static const emptyHome = 'emptyHome';
 
 }

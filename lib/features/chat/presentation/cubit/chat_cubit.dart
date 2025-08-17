@@ -5,6 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
 
+import '../../../../core/constants/app_cached.dart';
+import '../../../../core/local/shared_preferences/shared_pref_services.dart';
 import '../../data/models/message_model.dart';
 import '../../data/param/chat_param.dart';
 import '../../data/repository/chat_repository.dart';
@@ -13,8 +15,9 @@ part 'chat_state.dart';
 
 @injectable
 class ChatCubit extends Cubit<ChatState> {
-  ChatCubit(this.repository) : super(ChatInitial());
+  ChatCubit(this.repository, this.pref) : super(ChatInitial());
   final ChatRepository repository;
+  final SharedPrefServices pref;
 
   final msgController = TextEditingController();
   List<MessageModel> list=[];
@@ -50,6 +53,7 @@ class ChatCubit extends Cubit<ChatState> {
 
   initPusher() async {
     try {
+
       await pusher.init(
         apiKey: "3f9d157327ca3f3c9e88",
         cluster: "eu",
@@ -69,7 +73,7 @@ class ChatCubit extends Cubit<ChatState> {
           'headers': {'baz': 'boo'}
         },
         onEvent: (event) async {
-          if (event.eventName == "App\Events\NewMessageSent") {
+          if (event.eventName == "NewMessageSent") {
             debugPrint("Received name: ${event.eventName}");
             debugPrint("Received event: ${event.data}");
             await listen(data: event.data);
@@ -78,7 +82,7 @@ class ChatCubit extends Cubit<ChatState> {
           }
         },
       );
-      await pusher.subscribe(channelName: 'chat.20.1');
+      await pusher.subscribe(channelName: 'chat.1');
       await pusher.connect();
     } catch (e) {
       print("ERROR: $e");
@@ -91,10 +95,10 @@ class ChatCubit extends Cubit<ChatState> {
         data = jsonDecode(data);
       }
 
-      List<MessageModel>? tripModel = data != null ? List.from(data).map((e) => MessageModel.fromJson(e)).toList(): null;
-      if(tripModel!=null){
-        list = tripModel;
-      }
+      MessageModel? model = MessageModel.fromJson(data);
+
+        list.insert(0,model) ;
+
 
       print("update model");
       emit(SocketUpdateState());

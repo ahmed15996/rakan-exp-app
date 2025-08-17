@@ -156,5 +156,8 @@
   "reachRestaurant": "Reach the restaurant",
   "attachStageImage": "Attach stage image",
   "customerService": "Customer Service",
-  "typeAMessage": "write here..."
+  "typeAMessage": "write here...",
+  "registerSuccess": "Your request has been submitted successfully and will be reviewed, and you will be contacted as soon as possible",
+  "emptyHome":"No offers"
+
 }

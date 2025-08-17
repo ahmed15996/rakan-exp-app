@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:rakaan/core/constants/app_assets.dart';
 import 'package:rakaan/core/constants/app_colors.dart';
 import 'package:rakaan/core/constants/app_text_styles.dart';
 import 'package:rakaan/core/util/extensions/padding.dart';
@@ -23,8 +25,8 @@ class CustomNotificationItem extends StatelessWidget {
                 height: 32.r,
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration( shape: BoxShape.circle),
-                child: Image.asset(
-                  model.image,
+                child: SvgPicture.asset(
+                  AppAssets.notify,
                   fit: BoxFit.cover,
                 )).withPadding(end: 16.w),
             Expanded(

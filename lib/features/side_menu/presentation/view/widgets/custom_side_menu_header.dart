@@ -56,7 +56,7 @@ class CustomSideMenuHeader extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      cubit.pref.getData(key: AppCached.name),
+                      cubit.pref.getData(key: AppCached.name)??"",
                       style: AppTextStyles.textStyle14.copyWith(fontWeight: FontWeight.w500, color: AppColors.blackTextColor),
                     ),
                     // Icon(

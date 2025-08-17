@@ -12,6 +12,7 @@ import '../../../../../core/constants/app_colors.dart';
 import '../../../../../core/constants/app_text_styles.dart';
 import '../../../../../generated/locale_keys.g.dart';
 import '../../../../home/presentation/view/widgets/custom_delivery_item.dart';
+import '../../../../home/presentation/view/widgets/custom_timer_widget.dart';
 import 'open_id.dart';
 
 class CustomTripHeader extends StatelessWidget {
@@ -29,7 +30,7 @@ final int time;
               Text(LocaleKeys.orderNumber.tr(),
                       style: AppTextStyles.textStyle12.copyWith(fontWeight: FontWeight.w500, color: AppColors.grayTextColor))
                   .withPadding(end: 2.w),
-              Text("#${cubit.model?.code}",
+              Text("#${cubit.model?.code??""}",
                   style: AppTextStyles.textStyle12.copyWith(fontWeight: FontWeight.w500, color: AppColors.blackTextColor)),
             ],
           ).onTap(function: () {
@@ -41,20 +42,9 @@ final int time;
             );
           },),
 
-          Spacer(),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-            decoration: BoxDecoration(color: AppColors.primaryColor, borderRadius: BorderRadius.circular(16.r)),
-            child: Column(
-              children: [
-                Text(LocaleKeys.acceptOrder.tr(),
-                        style: AppTextStyles.textStyle12.copyWith(fontWeight: FontWeight.w600, color: AppColors.whiteColor))
-                    .withPadding(bottom: 2.h),
-                Text("$time ${LocaleKeys.seconds.tr()}",
-                    style: AppTextStyles.textStyle12.copyWith(fontWeight: FontWeight.w600, color: AppColors.secondaryColor))
-              ],
-            ),
-          )
+
+          if(cubit.model?.id!=null)
+          Expanded(child: CustomTimerWidget(model: cubit.model!, time: time,withTap:false))
         ]),
         Row(
           children: [

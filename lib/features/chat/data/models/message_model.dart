@@ -7,9 +7,9 @@ part 'message_model.g.dart';
 class MessageModel {
   @JsonKey(name: 'id')
   final int id;
-  @JsonKey(name: 'user')
+  @JsonKey(name: 'sender')
   final StaticModel? user;
-  @JsonKey(name: 'admin')
+  @JsonKey(name: 'receive')
   final StaticModel? admin;
   @JsonKey(name: 'type')
   final String type;

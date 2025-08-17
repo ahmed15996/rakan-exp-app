@@ -19,7 +19,7 @@ TripModel _$TripModelFromJson(Map<String, dynamic> json) => TripModel(
       status: json['status'] == null
           ? null
           : StaticModel.fromJson(json['status'] as Map<String, dynamic>),
-      delivery: (json['delivery'] as num?)?.toInt(),
+      delivery: json['delivery'] as String,
       serviceProvider: json['service_provider'] == null
           ? null
           : PersonModel.fromJson(

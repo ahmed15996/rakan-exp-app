@@ -41,8 +41,12 @@ class CustomEditProfileCar extends StatelessWidget {
             (index) => Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(cubit.cars[index].id == cubit.carModel?.id ? Icons.check_box_outlined : Icons.check_box_outline_blank,
-                        size: 20.r, color: cubit.cars[index].id == cubit.carModel?.id ? AppColors.blackLightColor : AppColors.grayTextColor)
+                Icon(
+                        cubit.cars[index].id.toString() == cubit.carModel?.id.toString()
+                            ? Icons.check_box_outlined
+                            : Icons.check_box_outline_blank,
+                        size: 20.r,
+                        color: cubit.cars[index].id == cubit.carModel?.id ? AppColors.blackLightColor : AppColors.grayTextColor)
                     .withPadding(end: 8.w),
                 Column(
                   mainAxisSize: MainAxisSize.min,

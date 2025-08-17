@@ -14,11 +14,7 @@ class RegisterLoading extends RegisterState {}
 class RegisterFailure extends RegisterState {}
 
 class RegisterSuccess extends RegisterState {
-  final String msg;
 
-  RegisterSuccess({required this.msg}) {
-    showToast(text: msg, state: ToastStates.success);
-  }
 }
 
 class RegisterValidationFailure extends RegisterState {}
