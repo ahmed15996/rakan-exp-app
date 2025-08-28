@@ -1,7 +1,8 @@
 class TripDetailsArguments {
   final String id;
-  final int second;
+   int second;
+   final void Function()? updateHome;
 
-  TripDetailsArguments({required this.id,required this.second});
+  TripDetailsArguments({required this.id,required this.second,this.updateHome});
 
 }

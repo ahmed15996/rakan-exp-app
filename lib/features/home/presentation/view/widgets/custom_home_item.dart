@@ -8,16 +8,18 @@ import 'package:rakaan/core/constants/app_text_styles.dart';
 import 'package:rakaan/core/util/extensions/on_tap.dart';
 import 'package:rakaan/core/util/extensions/padding.dart';
 import 'package:rakaan/features/home/data/models/trip_model.dart';
+import 'package:rakaan/features/home/presentation/cubit/home_cubit.dart';
 import 'package:rakaan/generated/locale_keys.g.dart';
 
 import 'custom_delivery_item.dart';
 import 'custom_timer_widget.dart';
 
 class CustomHomeItem extends StatefulWidget {
-  const CustomHomeItem({super.key, required this.model, required this.time});
+  const CustomHomeItem({super.key, required this.model, required this.time, required this.homeCubit});
 
   final TripModel model;
   final int time;
+  final HomeCubit homeCubit;
 
   @override
   State<CustomHomeItem> createState() => _CustomHomeItemState();
@@ -33,7 +35,6 @@ class _CustomHomeItemState extends State<CustomHomeItem> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Row(
-
             children: [
               Column(
                 children: [
@@ -48,7 +49,14 @@ class _CustomHomeItemState extends State<CustomHomeItem> {
                       style: AppTextStyles.textStyle12.copyWith(fontWeight: FontWeight.w500, color: AppColors.grayTextColor))
                 ],
               ),
-              Flexible(child: CustomTimerWidget(model: widget.model, time: widget.time))
+              Flexible(
+                  child: CustomTimerWidget(
+                model: widget.model,
+                time: widget.time,
+                updateHome: () {
+                  widget.homeCubit.getTrip();
+                },
+              ))
             ],
           ).withPadding(horizontal: 16.w),
           Divider(color: AppColors.whiteColor, thickness: 8.h, height: 28.h),

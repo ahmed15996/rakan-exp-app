@@ -14,8 +14,9 @@ import 'app_notification.dart';
 class AppFirebase {
   late AppNotifications appNotifications;
 
-   Future<AppFirebase> initializeFireBaseNotifications() async {
-     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);    var init = AppFirebase();
+  Future<AppFirebase> initializeFireBaseNotifications() async {
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    var init = AppFirebase();
     init.appNotifications = AppNotifications();
     await init.getFCMPermission();
     await init.registerFCMForegroundListener();
@@ -26,8 +27,7 @@ class AppFirebase {
 
   Future<void> listenOnMessageOpenedApp() async {
     try {
-      FirebaseMessaging.onMessageOpenedApp
-          .listen(_firebaseMessageOpenAppHandler);
+      FirebaseMessaging.onMessageOpenedApp.listen(_firebaseMessageOpenAppHandler);
     } catch (e) {
       debugPrint("registerFCMBackgroundListenerError: $e");
     }
@@ -35,8 +35,7 @@ class AppFirebase {
 
   Future<void> getFCMPermission() async {
     try {
-      await FirebaseMessaging.instance
-          .setForegroundNotificationPresentationOptions(
+      await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
         alert: true, // Required to display a heads up notification
         badge: true,
         sound: true,
@@ -52,7 +51,7 @@ class AppFirebase {
         sound: true,
       )
           .then(
-            (value) {
+        (value) {
           debugPrint('User granted permission: ${value.authorizationStatus}');
         },
       );
@@ -60,7 +59,6 @@ class AppFirebase {
       debugPrint('User granted permission error : $e');
     }
   }
-
 
   Future<String?> getFirebaseToken() async {
     FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -89,7 +87,7 @@ class AppFirebase {
     try {
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
         debugPrint("RemoteMessage: ${jsonEncode(message.toMap())}");
-        if(Platform.isAndroid){
+        if (Platform.isAndroid) {
           appNotifications.showNotification(message);
         }
       });

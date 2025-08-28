@@ -63,6 +63,7 @@ class CustomPersonRegisterFormWidget extends StatelessWidget {
           onTap: () async {
             await showDatePicker(
                     context: context,
+                    initialEntryMode: DatePickerEntryMode.calendarOnly,
                     initialDate: DateTime.now(),
                     firstDate: DateTime.now().subtract(Duration(days: 30000)),
                     lastDate: DateTime.now())
@@ -77,7 +78,7 @@ class CustomPersonRegisterFormWidget extends StatelessWidget {
           ctrl: cubit.emailCtrl,
           label: LocaleKeys.email.tr(),
           keyboardType: TextInputType.emailAddress,
-          validator: AppValidator.requiredValidator(),
+          validator: AppValidator.emailValidator(),
           hintText: LocaleKeys.email.tr(),
           autoValidateMode: AutovalidateMode.onUserInteraction,
         ).withPadding(bottom: 16.h),

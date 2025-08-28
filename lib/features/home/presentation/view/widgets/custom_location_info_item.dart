@@ -14,11 +14,12 @@ class CustomLocationInfoItem extends StatelessWidget {
       required this.name,
       required this.desc,
       required this.distance,
+      required this.phone,
       required this.withLine,
       this.img,
       this.onTap});
 
-  final String titleType, name, desc, distance;
+  final String titleType, name, phone, desc, distance;
   final bool withLine;
   final String? img;
   final void Function()? onTap;
@@ -47,23 +48,29 @@ class CustomLocationInfoItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(crossAxisAlignment: CrossAxisAlignment.start,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: Text(name, style: AppTextStyles.textStyle12.copyWith(fontWeight: FontWeight.w500, color: AppColors.blackTextColor))
-                        .withPadding(bottom: 4.h)
-                  ),
-        if (img != null)
-          SvgPicture.asset(img!, width: 40.r, height: 40.r).onTapShadow(
-            borderRadius: BorderRadius.circular(8.r),
-            function: () {
-              if (onTap != null) {
-                onTap!();
-              }
-            },).withPadding(end: 6.w)
+                      child: Text(name,
+                              style: AppTextStyles.textStyle12.copyWith(fontWeight: FontWeight.w500, color: AppColors.blackTextColor))
+                          .withPadding(bottom: 4.h)),
+                  if (img != null)
+                    SvgPicture.asset(img!, width: 40.r, height: 40.r)
+                        .onTapShadow(
+                          borderRadius: BorderRadius.circular(8.r),
+                          function: () {
+                            if (onTap != null) {
+                              onTap!();
+                            }
+                          },
+                        )
+                        .withPadding(end: 6.w)
                 ],
               ),
-              Text(desc, style: AppTextStyles.textStyle8.copyWith(fontWeight: FontWeight.w400, color: AppColors.grayTextColor)),
+              if (desc.isNotEmpty)
+                Text(desc, style: AppTextStyles.textStyle8.copyWith(fontWeight: FontWeight.w400, color: AppColors.grayTextColor)),
+              Text(phone, style: AppTextStyles.textStyle8.copyWith(fontWeight: FontWeight.w400, color: AppColors.grayTextColor)),
             ],
           ),
         ),

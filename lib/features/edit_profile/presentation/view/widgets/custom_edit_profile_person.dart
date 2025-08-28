@@ -43,7 +43,7 @@ class CustomEditProfilePerson extends StatelessWidget {
             ctrl: cubit.emailCtrl,
             label: LocaleKeys.email.tr(),
             keyboardType: TextInputType.emailAddress,
-            validator: AppValidator.requiredValidator(),
+            validator: AppValidator.emailValidator(),
             hintText: LocaleKeys.email.tr(),
             autoValidateMode: AutovalidateMode.onUserInteraction,
           ).withPadding(bottom: 16.h),

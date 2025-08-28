@@ -16,5 +16,6 @@ class AppCached {
   static const String carId = "carId";
   static const String carName = "carName";
   static const String email = "email";
+  static const String isFirstLogin = "isFirstLogin";
 
 }

@@ -2,6 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rakaan/core/constants/app_assets.dart';
+import 'package:rakaan/core/constants/app_cached.dart';
+import 'package:rakaan/core/local/shared_preferences/shared_pref_services.dart';
 import 'package:rakaan/core/widgets/custom_toast.dart';
 
 import '../../data/models/on_boarding_model.dart';
@@ -11,8 +13,9 @@ part 'on_boarding_state.dart';
 
 @injectable
 class OnBoardingCubit extends Cubit<OnBoardingState> {
-  OnBoardingCubit(this.repository) : super(OnBoardingInitial());
+  OnBoardingCubit(this.repository, this.pref) : super(OnBoardingInitial());
   final OnBoardingRepository repository;
+  final SharedPrefServices pref;
 
   late int currentIndex = 0;
   List<OnBoardingModel> list = [
@@ -55,5 +58,9 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     isLast = true;
 
     emit(OnBoardingUpdateState());
+  }
+
+  updateForLogin()async{
+   await pref.saveData(AppCached.isFirstLogin, true);
   }
 }

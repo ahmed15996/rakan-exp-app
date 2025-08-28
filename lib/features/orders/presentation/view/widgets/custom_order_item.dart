@@ -12,7 +12,6 @@ import '../../../../../core/constants/app_text_styles.dart';
 import '../../../../../core/util/routing/routes.dart';
 import '../../../../../generated/locale_keys.g.dart';
 import '../../../../home/presentation/view/widgets/custom_delivery_item.dart';
-import '../../../data/models/order_model.dart';
 
 class CustomBrokerOrderItem extends StatelessWidget {
   const CustomBrokerOrderItem({super.key, required this.model, this.onUpdate});
@@ -32,7 +31,7 @@ class CustomBrokerOrderItem extends StatelessWidget {
               Text(LocaleKeys.orderNumber.tr(),
                       style: AppTextStyles.textStyle12.copyWith(fontWeight: FontWeight.w500, color: AppColors.grayTextColor))
                   .withPadding(end: 2.w),
-              Text("#${45875}", style: AppTextStyles.textStyle12.copyWith(fontWeight: FontWeight.w500, color: AppColors.blackTextColor)),
+              Text("#${model.code??""}", style: AppTextStyles.textStyle12.copyWith(fontWeight: FontWeight.w500, color: AppColors.blackTextColor)),
               Spacer(),
               Text(LocaleKeys.orderDetails.tr(),
                       style: AppTextStyles.textStyle12.copyWith(fontWeight: FontWeight.w500, color: AppColors.primaryColor))
@@ -44,18 +43,17 @@ class CustomBrokerOrderItem extends StatelessWidget {
               )
             ],
           ).withPadding(horizontal: 16.w),
-
           CustomDeliveryItem(
             provider: model.serviceProvider!,
             client: model.clint!,
-            time:model.time ?? "",
+            time: model.time ?? "",
           ).withPadding(top: 24.h)
         ],
       ),
     ).onTapShadow(
       borderRadius: BorderRadius.circular(8.r),
       function: () {
-        context.pushWithNamed(Routes.orderStatusView, arguments: OrderStatusArguments(model: model));
+        context.pushWithNamed(Routes.orderStatusView, arguments: OrderStatusArguments(model: model, onUpdate: onUpdate));
       },
     );
   }

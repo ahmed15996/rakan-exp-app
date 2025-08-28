@@ -10,7 +10,7 @@ class ApiConstants {
 
   // static const String baseUrl = 'http://sayedabdelkrim-002-site3.qtempurl.com/api/v1/';
 
-  static const String baseUrl = 'https://exxp.togoapp.org/api/';
+  static const String baseUrl = 'https://silver-gaur-258870.hostingersite.com/api/';
   static const String countries = 'country/all';
 
   static const String cities = 'cities';

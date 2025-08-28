@@ -62,7 +62,7 @@ class DioApiConsumer extends ApiConsumer {
     if (token.isNotEmpty) {
       return {
         'Accept': 'application/json',
-        'Accept-Language': lang == "ar" ? "ar" : "en",
+        'Accept-Language': lang == 'ar' ? "ar" : "en",
         if (sendToken != null) 'Authorization': 'Bearer $sendToken',
         if (sendToken == null) 'Authorization': 'Bearer $token',
 
@@ -70,7 +70,7 @@ class DioApiConsumer extends ApiConsumer {
     } else {
       return {
         'Accept': 'application/json',
-        'Accept-Language': lang == "ar" ? "ar" : "en",
+        'Accept-Language': lang == 'ar' ? "ar" : "en",
         if (sendToken != null) 'Authorization': 'Bearer $sendToken',
 
       };

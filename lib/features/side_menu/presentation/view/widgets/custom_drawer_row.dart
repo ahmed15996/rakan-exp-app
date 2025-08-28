@@ -21,7 +21,7 @@ class CustomDrawerRow extends StatelessWidget {
         Row(
           children: [
             Directionality(
-                    textDirection: context.locale.languageCode == "ar" ? TextDirection.rtl : TextDirection.ltr,
+                textDirection: context.locale.languageCode=='ar'?TextDirection.ltr:TextDirection.rtl,
                     child: SvgPicture.asset(image, width: 24.r, matchTextDirection: true, height: 24.r))
                 .withPadding(end: 12.w),
             Expanded(

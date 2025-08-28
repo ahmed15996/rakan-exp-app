@@ -342,12 +342,14 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i1063.DocumentHelper>(),
           gh<_i957.AuthRepository>(),
         ));
+    gh.factory<_i288.OnBoardingCubit>(() => _i288.OnBoardingCubit(
+          gh<_i347.OnBoardingRepository>(),
+          gh<_i336.SharedPrefServices>(),
+        ));
     gh.factory<_i856.StaticPageCubit>(() => _i856.StaticPageCubit(
           gh<_i664.StaticPageRepository>(),
           gh<_i336.SharedPrefServices>(),
         ));
-    gh.factory<_i288.OnBoardingCubit>(
-        () => _i288.OnBoardingCubit(gh<_i347.OnBoardingRepository>()));
     gh.factory<_i132.StaticsCubit>(
         () => _i132.StaticsCubit(gh<_i993.StaticsRepository>()));
     gh.factory<_i501.OrdersCubit>(() => _i501.OrdersCubit(

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart' as t;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,16 +22,21 @@ class CustomAppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SvgPicture.asset(
-            AppAssets.arrow,
-            width: 24.r,
-            height: 24.r,
-            colorFilter: ColorFilter.mode(AppColors.blackTextColor, BlendMode.srcIn),
-          ).onTapShadow(
-              borderRadius: BorderRadius.circular(8.r),
-              function: () {
-                context.pop();
-              }),
+          Directionality(
+            textDirection: context.locale.languageCode=='ar'?TextDirection.ltr:TextDirection.rtl,
+            child: SvgPicture.asset(
+              AppAssets.arrow,
+              width: 24.r,
+
+              height: 24.r,
+              matchTextDirection: true,
+              colorFilter: ColorFilter.mode(AppColors.blackTextColor, BlendMode.srcIn),
+            ).onTapShadow(
+                borderRadius: BorderRadius.circular(8.r),
+                function: () {
+                  context.pop();
+                }),
+          ),
           Text(title, style: AppTextStyles.textStyle16.copyWith(fontWeight: FontWeight.w500, color: AppColors.blackTextColor))
               .withPadding(horizontal: 16.w),
           if (widget != null)

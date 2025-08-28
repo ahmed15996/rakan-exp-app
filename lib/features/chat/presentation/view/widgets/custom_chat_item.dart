@@ -14,28 +14,31 @@ class CustomChatItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        CustomImageNetwork(image: img, widthImage: 24.r, heightImage: 24.r),
-        Expanded(
-          child: Container(
-            width: double.infinity,
-            alignment: AlignmentDirectional.centerStart,
-            margin: EdgeInsets.only(bottom: 16.h),
-            padding: EdgeInsetsDirectional.only(end: 16.w, start: 16.w, top: 8.h, bottom: 8.h),
-            decoration: BoxDecoration(
-                color: AppColors.whiteLightColor,
-                borderRadius: BorderRadiusDirectional.only(
-                    topStart: Radius.circular(12.r),
-                    topEnd: Radius.circular(12.r),
-                    bottomStart: Radius.circular(fromSender ? 12.r : 0),
-                    bottomEnd: Radius.circular(fromSender ? 0 : 12.r))),
-            child: Text(msg,
-                textAlign: TextAlign.start,
-                style: AppTextStyles.textStyle14.copyWith(fontWeight: FontWeight.w400, color: AppColors.blackTextColor)),
+    return Directionality(
+      textDirection: fromSender ? TextDirection.ltr : TextDirection.rtl,
+      child: Row(
+        children: [
+          CustomImageNetwork(image: img, widthImage: 24.r, heightImage: 24.r),
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              alignment: AlignmentDirectional.centerStart,
+              margin: EdgeInsets.only(bottom: 16.h),
+              padding: EdgeInsetsDirectional.only(end: 16.w, start: 16.w, top: 8.h, bottom: 8.h),
+              decoration: BoxDecoration(
+                  color: AppColors.whiteLightColor,
+                  borderRadius: BorderRadiusDirectional.only(
+                      topStart: Radius.circular(12.r),
+                      topEnd: Radius.circular(12.r),
+                      bottomStart: Radius.circular(0),
+                      bottomEnd: Radius.circular(12.r))),
+              child: Text(msg,
+                  textAlign: TextAlign.start,
+                  style: AppTextStyles.textStyle14.copyWith(fontWeight: FontWeight.w400, color: AppColors.blackTextColor)),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

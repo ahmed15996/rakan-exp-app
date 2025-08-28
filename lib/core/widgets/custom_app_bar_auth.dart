@@ -63,8 +63,9 @@ class CustomAppBarAuth extends StatelessWidget {
                   textDirection: context.locale.languageCode == "ar" ? TextDirection.ltr : TextDirection.rtl,
                   child: SvgPicture.asset(
                     AppAssets.arrow,
+
                     height: 24.h,
-                    width: 24.w,
+                    width: 24.w,matchTextDirection: true,
                   ).onTap(
                     function: () {
                       if (onTap != null) {

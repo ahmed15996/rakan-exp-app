@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
@@ -10,6 +11,7 @@ import 'package:injectable/injectable.dart';
 import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
 import 'package:rakaan/features/home/data/models/home_model.dart';
 import 'package:rakaan/features/home/data/param/online_param.dart';
+import 'package:archive/archive.dart';
 
 import '../../../../core/constants/app_cached.dart';
 import '../../../../core/helpers/custom_location_helper.dart';
@@ -227,24 +229,36 @@ class HomeCubit extends Cubit<HomeState> {
         return;
       }
 
-      // لو جاي String نحوله لـ Map
+      // لو جاي String (ممكن يكون JSON عادي أو مضغوط)
       if (data is String) {
         try {
           data = jsonDecode(data);
-          debugPrint("success to decode event data: $data");
-        } catch (decodeError) {
-          debugPrint("Failed to decode event data: $decodeError");
+          debugPrint("Success: Decoded plain JSON string.");
+        } catch (_) {
+          debugPrint("String is not plain JSON, will check further...");
+        }
+      }
+
+      // لو فيه meta + chunk
+      if (data is Map<String, dynamic> && data.containsKey("chunk")) {
+        try {
+          String chunk = data["chunk"];
+          Uint8List compressedBytes = base64.decode(chunk);
+          List<int> decompressedBytes = GZipDecoder().decodeBytes(compressedBytes);
+          String jsonString = utf8.decode(decompressedBytes);
+          data = jsonDecode(jsonString);
+          debugPrint("Success: Decoded meta+chunk gzip+base64 JSON.");
+        } catch (e) {
+          debugPrint("Failed to decode chunk: $e");
           return;
         }
       }
 
-      // هنا نتأكد إنه Map
+      // في الآخر لازم يكون Map
       if (data is Map<String, dynamic>) {
-        // لو فيه مفتاح data
         if (data.containsKey('data') && data['data'] != null) {
           model = HomeModel.fromJson(data['data']);
         } else {
-          // الحالة الجديدة: البيانات كلها في الـ root
           model = HomeModel.fromJson(data);
         }
         debugPrint("Model updated from Pusher event.");

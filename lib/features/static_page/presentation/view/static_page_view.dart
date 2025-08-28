@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rakaan/core/constants/app_cached.dart';
 import 'package:rakaan/core/util/extensions/padding.dart';
@@ -49,10 +50,11 @@ class _StaticPageViewState extends State<StaticPageView> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(cubit.data ?? "",
-                                      style:
-                                          AppTextStyles.textStyle14.copyWith(fontWeight: FontWeight.w400, color: AppColors.grayTextColor))
-                                  .withPadding(top: 16.h),
+                              Html(data: cubit.data??"").withPadding(top: 16.h)
+                              // Text(cubit.data ?? "",
+                              //         style:
+                              //             AppTextStyles.textStyle14.copyWith(fontWeight: FontWeight.w400, color: AppColors.grayTextColor))
+                              //     .withPadding(top: 16.h),
                             ],
                           ),
                         ))

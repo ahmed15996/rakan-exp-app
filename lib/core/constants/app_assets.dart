@@ -11,6 +11,7 @@ class AppAssets {
   static const String onboardingBtn = "$_iconsPath/onboarding_btn.svg";
   static const String sideMenu = "$_iconsPath/side_menu.svg";
   static const String notify = "$_iconsPath/notify.svg";
+  static const String lang = "$_iconsPath/lang.svg";
   static const String market = "$_iconsPath/market.svg";
   static const String filter = "$_iconsPath/filter.svg";
   static const String headphone = "$_iconsPath/headphone.svg";

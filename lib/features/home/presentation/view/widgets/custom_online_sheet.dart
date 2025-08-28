@@ -47,6 +47,7 @@ class CustomOnlineSheet extends StatelessWidget {
                     Flexible(
                         child: Text(LocaleKeys.activeNow.tr(),
                             style: AppTextStyles.textStyle14.copyWith(fontWeight: FontWeight.w500, color: AppColors.blackTextColor))),
+                    if(cubit.model?.online??false)
                     CircleAvatar(radius: 6.r, backgroundColor: AppColors.greenColor),
                   ],
                 ),

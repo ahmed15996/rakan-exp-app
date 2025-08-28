@@ -163,5 +163,6 @@ abstract class  LocaleKeys {
   static const typeAMessage = 'typeAMessage';
   static const registerSuccess = 'registerSuccess';
   static const emptyHome = 'emptyHome';
+  static const language = 'language';
 
 }

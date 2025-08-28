@@ -158,6 +158,6 @@
   "customerService": "Customer Service",
   "typeAMessage": "write here...",
   "registerSuccess": "Your request has been submitted successfully and will be reviewed, and you will be contacted as soon as possible",
-  "emptyHome":"No offers"
-
+  "emptyHome":"No offers",
+  "language": "language"
 }

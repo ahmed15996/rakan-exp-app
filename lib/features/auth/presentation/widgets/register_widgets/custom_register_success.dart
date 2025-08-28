@@ -7,6 +7,8 @@ import 'package:rakaan/core/util/extensions/navigation.dart';
 import 'package:rakaan/core/util/extensions/padding.dart';
 import 'package:rakaan/generated/locale_keys.g.dart';
 
+import '../../../../../core/util/routing/routes.dart';
+
 class CustomRegisterSuccess extends StatefulWidget {
   const CustomRegisterSuccess({super.key});
 
@@ -21,7 +23,7 @@ class _CustomRegisterSuccessState extends State<CustomRegisterSuccess> {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
       if (mounted) {
-       context.pop();
+        context.pushAndRemoveUntilWithNamed(Routes.loginView);
       }
     });
   }

@@ -67,7 +67,7 @@ class AppRouter {
       case Routes.onBoardingView:
         return _buildRoute(
           builder: (_) => BlocProvider(
-            create: (context) => getIt<OnBoardingCubit>()..getData(),
+            create: (context) => getIt<OnBoardingCubit>()..getData()..updateForLogin(),
             child: const OnBoardingView(),
           ),
         );

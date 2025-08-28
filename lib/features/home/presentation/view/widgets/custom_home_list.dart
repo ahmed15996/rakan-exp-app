@@ -18,6 +18,7 @@ class CustomHomeList extends StatelessWidget {
           (index) => CustomHomeItem(
                 model: cubit.model!.offers![index],
                 time: cubit.model!.seconds?.toInt() ?? 20,
+            homeCubit: cubit,
               )),
     ).withPadding(top: 24.h);
   }

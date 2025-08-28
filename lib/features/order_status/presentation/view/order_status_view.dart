@@ -31,6 +31,9 @@ class OrderStatusView extends StatelessWidget {
         if (state is OrderStatusSuccess) {
           if (context.read<OrderStatusCubit>().model != null) {
             arguments.model = context.read<OrderStatusCubit>().model!;
+            if (arguments.onUpdate != null) {
+              arguments.onUpdate!();
+            }
           }
         }
       },

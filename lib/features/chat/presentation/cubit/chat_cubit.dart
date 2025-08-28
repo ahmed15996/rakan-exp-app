@@ -37,12 +37,14 @@ class ChatCubit extends Cubit<ChatState> {
 
   /// send msg
   void sendMsg({required ChatParam param}) async {
+    msgController.clear();
     emit(SendMessageLoading());
     var result = await repository.sendMsg(param: param);
+
     result.fold((failure) {
       emit(SendMessageFailed(msg: failure.message));
     }, (msg) {
-      msgController.clear();
+
       emit(SendMessageSuccess());
     });
   }

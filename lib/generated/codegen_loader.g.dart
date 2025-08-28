@@ -174,7 +174,8 @@ class CodegenLoader extends AssetLoader{
   "customerService": "الدعم الفني",
   "typeAMessage": "اكتب هنا...",
   "registerSuccess": "لقد تم تقديم طلبك بنجاح وسيتم مراجعته والرد عليك في أقرب وقت",
-  "emptyHome": "لا يوجد عروض"
+  "emptyHome": "لا يوجد عروض",
+  "language": "اللغة"
 };
 static const Map<String,dynamic> _en = {
   "goToSettings": "Go to Settings",
@@ -336,7 +337,8 @@ static const Map<String,dynamic> _en = {
   "customerService": "Customer Service",
   "typeAMessage": "write here...",
   "registerSuccess": "Your request has been submitted successfully and will be reviewed, and you will be contacted as soon as possible",
-  "emptyHome": "No offers"
+  "emptyHome": "No offers",
+  "language": "language"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": _ar, "en": _en};
 }

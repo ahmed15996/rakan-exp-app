@@ -26,13 +26,9 @@ class OrdersAppBar extends StatelessWidget {
         children: [
           CustomAppBar(title: LocaleKeys.orderHistory.tr()),
           Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(24.r), color: AppColors.whiteLightColor),
-                child: SvgPicture.asset(AppAssets.filter),
-              ),
-              widthSpace(16.w),
+
               Flexible(
                 child: CustomDropDownField(
                     radius: 500.r,

@@ -59,6 +59,8 @@ dependencies:
   moyasar: ^2.0.13
   pusher_channels_flutter:
   flutter_polyline_points: ^2.0.0
+  archive: ^3.6.1
+  flutter_html: ^3.0.0
 
 dependency_overrides:
   path: ^1.9.1

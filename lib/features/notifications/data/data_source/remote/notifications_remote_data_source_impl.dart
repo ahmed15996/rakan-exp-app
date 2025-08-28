@@ -15,7 +15,7 @@ class NotificationsRemoteDataSourceImpl extends NotificationsRemoteDataSource {
 
   @override
   Future<String> deleteAllNotify() async {
-    BaseResponse response = await apiConsumer.delete(
+    BaseResponse response = await apiConsumer.get(
       ApiConstants.deleteNotification,
     );
     if (response.status == true) {

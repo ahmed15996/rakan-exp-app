@@ -25,15 +25,21 @@ class SideMenuCubit extends Cubit<SideMenuState> {
     emit(SideMenuUpdate());
   }
 
-
-
   void logout({required BuildContext context}) async {
     emit(LogoutLoading());
     var result = await repository.logout();
     result.fold((failure) {
       emit(LogoutFailed(msg: failure.message));
     }, (msg) async {
-      await pref.clearData(AppCached.token);
+      await pref.removeData(key: AppCached.token);
+      await pref.removeData(key: AppCached.cityId);
+      await pref.removeData(key: AppCached.cityName);
+      await pref.removeData(key: AppCached.carId);
+      await pref.removeData(key: AppCached.carName);
+      await pref.removeData(key: AppCached.carImg);
+      await pref.removeData(key: AppCached.name);
+      await pref.removeData(key: AppCached.phone);
+      await pref.removeData(key: AppCached.isNotify);
 
       context.pushAndRemoveUntilWithNamed(Routes.loginView);
       emit(LogoutSuccess(msg: msg));
@@ -47,7 +53,17 @@ class SideMenuCubit extends Cubit<SideMenuState> {
     result.fold((failure) {
       emit(DeleteAccountFailed(msg: failure.message));
     }, (msg) async {
-      await pref.clearData(AppCached.token);
+      await pref.removeData(key: AppCached.token);
+      await pref.removeData(key: AppCached.cityId);
+      await pref.removeData(key: AppCached.cityName);
+      await pref.removeData(key: AppCached.carId);
+      await pref.removeData(key: AppCached.carName);
+      await pref.removeData(key: AppCached.carImg);
+      await pref.removeData(key: AppCached.name);
+      await pref.removeData(key: AppCached.phone);
+      await pref.removeData(key: AppCached.isFirstLogin);
+      await pref.removeData(key: AppCached.isNotify);
+
       context.pushAndRemoveUntilWithNamed(Routes.loginView);
       emit(DeleteAccountSuccess(msg: msg));
     });

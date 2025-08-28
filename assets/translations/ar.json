@@ -158,5 +158,6 @@
   "customerService": "الدعم الفني",
   "typeAMessage": "اكتب هنا...",
   "registerSuccess": "لقد تم تقديم طلبك بنجاح وسيتم مراجعته والرد عليك في أقرب وقت",
-  "emptyHome": "لا يوجد عروض"
+  "emptyHome": "لا يوجد عروض",
+  "language": "اللغة"
 }

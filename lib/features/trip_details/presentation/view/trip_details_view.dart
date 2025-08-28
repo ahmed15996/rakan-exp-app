@@ -41,7 +41,14 @@ class _TripDetailsViewState extends State<TripDetailsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<TripDetailsCubit, TripDetailsState>(
+      body: BlocConsumer<TripDetailsCubit, TripDetailsState>(
+        listener: (context, state) {
+          if (state is TripDetailsSuccess) {
+            if (widget.arguments.updateHome != null) {
+              widget.arguments.updateHome!();
+            }
+          }
+        },
         builder: (context, state) {
           final cubit = BlocProvider.of<TripDetailsCubit>(context);
 
@@ -73,33 +80,32 @@ class _TripDetailsViewState extends State<TripDetailsView> {
                   )),
               state is TripDetailsFailed
                   ? SizedBox(
-                height: 500.h,
-                child: CustomError(error: state.msg, retry: () => cubit.getTrip(id: widget.arguments.id))
-                    .withPadding(vertical: 48.h, top: 40.h),
-              )
+                      height: 500.h,
+                      child: CustomError(error: state.msg, retry: () => cubit.getTrip(id: widget.arguments.id))
+                          .withPadding(vertical: 48.h, top: 40.h),
+                    )
                   : state is TripDetailsLoading || state is TripDetailsInitial
-                  ? SizedBox(height: 32.r, width: 32.r, child: CircularProgressIndicator(color: AppColors.secondaryColor))
-                  .withPadding(vertical: 48.h, top: 40.h)
-                  .center
-                  :
-              Column(
-                children: [
-                  Expanded(
-                    child: DraggableScrollableSheet(
-                      initialChildSize: cubit.heightSheet, // الحجم الابتدائي
-                      minChildSize: 0.3,
-                      maxChildSize: .9,
-                      builder: (context, scrollController) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            color: AppColors.whiteColor,
-                            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                            boxShadow: [BoxShadow(color: AppColors.graySemiBoldColor, blurRadius: 10)],
-                          ),
-                          child: SingleChildScrollView(
-                            controller: scrollController,
-                            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
-                            child: Column(
+                      ? SizedBox(height: 32.r, width: 32.r, child: CircularProgressIndicator(color: AppColors.secondaryColor))
+                          .withPadding(vertical: 48.h, top: 40.h)
+                          .center
+                      : Column(
+                          children: [
+                            Expanded(
+                              child: DraggableScrollableSheet(
+                                initialChildSize: cubit.heightSheet, // الحجم الابتدائي
+                                minChildSize: 0.3,
+                                maxChildSize: .9,
+                                builder: (context, scrollController) {
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                      color: AppColors.whiteColor,
+                                      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                                      boxShadow: [BoxShadow(color: AppColors.graySemiBoldColor, blurRadius: 10)],
+                                    ),
+                                    child: SingleChildScrollView(
+                                      controller: scrollController,
+                                      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
+                                      child: Column(
                                         children: [
                                           Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,7 +122,13 @@ class _TripDetailsViewState extends State<TripDetailsView> {
                                               )
                                             ],
                                           ),
-                                          CustomTripHeader(cubit: cubit, time: widget.arguments.second),
+                                          CustomTripHeader(
+                                              cubit: cubit,
+                                              time: widget.arguments.second,
+                                              onFinish: () {
+                                                widget.arguments.second = 0;
+                                                cubit.update();
+                                              }),
                                           Divider(height: 32.h, color: AppColors.whiteLightColor, thickness: 10.h),
                                           if (cubit.model != null)
                                             CustomDeliveryItem(
@@ -175,22 +187,30 @@ class _TripDetailsViewState extends State<TripDetailsView> {
                                           ).onTapShadow(borderRadius: BorderRadius.circular(8.r), function: () => cubit.updateHeight()),
                                           CustomButton(
                                             text: LocaleKeys.deliveryStarted.tr(),
+                                            backgroundColor: widget.arguments.second == 0 ? AppColors.hintColor : null,
                                             onPressed: () {
                                               if (cubit.model != null) {
-                                                context.pushWithNamed(Routes.orderStatusView,
-                                                    arguments: OrderStatusArguments(model: cubit.model!));
+                                                if (widget.arguments.second != 0) {
+                                                  context.pushWithNamed(Routes.orderStatusView,
+                                                      arguments: OrderStatusArguments(
+                                                        model: cubit.model!,
+                                                        onUpdate: () {
+                                                          cubit.getTrip(id: widget.arguments.id);
+                                                        },
+                                                      ));
+                                                }
                                               }
                                             },
                                           ).withPadding(vertical: 16.h, horizontal: 32.w)
                                         ],
                                       ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              )
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        )
             ],
           );
         },

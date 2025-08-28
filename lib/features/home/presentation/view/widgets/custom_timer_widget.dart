@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,13 +19,16 @@ class CustomTimerWidget extends StatefulWidget {
     super.key,
     required this.model,
     required this.time,
-     this.withTap=true,
-
+    this.onFinish,
+    this.updateHome,
+    this.withTap = true,
   });
 
   final TripModel model;
   final int time;
   final bool withTap;
+  final void Function()? updateHome;
+  final void Function()? onFinish;
 
   @override
   State<CustomTimerWidget> createState() => _CustomTimerWidgetState();
@@ -47,6 +51,9 @@ class _CustomTimerWidgetState extends State<CustomTimerWidget> {
       } else {
         t.cancel();
       }
+      if (time == 0 && widget.onFinish != null) {
+        widget.onFinish!();
+      }
     });
   }
 
@@ -58,27 +65,24 @@ class _CustomTimerWidgetState extends State<CustomTimerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // حساب نسبة اللون الأزرق من إجمالي الوقت
     double blueWidthRatio = time / widget.time;
 
     return Container(
       width: 100.w,
-
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: AppColors.hintColor, // الخلفية الرمادية
+        color: AppColors.hintColor,
         borderRadius: BorderRadius.circular(16.r),
       ),
       child: IntrinsicHeight(
         child: Stack(
           children: [
             SizedBox(
-
               height: double.infinity,
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: FractionallySizedBox(
-                  widthFactor: blueWidthRatio>0?blueWidthRatio:0,
+                  widthFactor: blueWidthRatio > 0 ? blueWidthRatio : 0,
                   heightFactor: 1.0,
                   child: Container(
                     decoration: BoxDecoration(
@@ -107,23 +111,23 @@ class _CustomTimerWidgetState extends State<CustomTimerWidget> {
                   ),
                 ),
               ],
-            ).center.withPadding(horizontal: 16.w,vertical:8.h ),
+            ).center.withPadding(horizontal: 16.w, vertical: 8.h),
           ],
         ),
       ),
     ).toEnd.onTapShadow(
-      borderRadius: BorderRadius.circular(8.r),
-      function: () {
-        if(widget.withTap) {
-          context.pushWithNamed(
-          Routes.tripDetailsView,
-          arguments: TripDetailsArguments(
-            id: widget.model.id.toString(),
-            second: time,
-          ),
-        );
-        }
-      }
-    );
+        borderRadius: BorderRadius.circular(8.r),
+        function: () {
+          if (widget.withTap) {
+            context.pushWithNamed(
+              Routes.tripDetailsView,
+              arguments: TripDetailsArguments(
+                id: widget.model.id.toString(),
+                second: time,
+                updateHome: widget.updateHome,
+              ),
+            );
+          }
+        });
   }
 }

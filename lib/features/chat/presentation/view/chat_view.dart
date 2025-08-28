@@ -68,7 +68,7 @@ class ChatView extends StatelessWidget {
                     .onTapShadow(
                         borderRadius: BorderRadius.circular(8.r),
                         function: () {
-                          if (cubit.msgController.text.isNotEmpty) {
+                          if (cubit.msgController.text.isNotEmpty && state is! SendMessageLoading) {
                             cubit.sendMsg(param: ChatParam(message: cubit.msgController.text));
                           }
                         })

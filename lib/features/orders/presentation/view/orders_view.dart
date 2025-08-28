@@ -36,7 +36,9 @@ class OrdersView extends StatelessWidget {
                               child: ListView.builder(
                               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
                               itemCount: cubit.orderModel.length,
-                              itemBuilder: (context, index) => CustomBrokerOrderItem(model: cubit.orderModel[index]).withPadding(top: 16.h),
+                              itemBuilder: (context, index) => CustomBrokerOrderItem(model: cubit.orderModel[index],onUpdate: () {
+                                cubit.getData();
+                              },).withPadding(top: 16.h),
                             ))
             ],
           ),

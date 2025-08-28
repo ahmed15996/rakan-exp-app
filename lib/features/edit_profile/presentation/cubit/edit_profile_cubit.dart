@@ -97,7 +97,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     String? name = pref.getData(key: AppCached.name);
     String? phone = pref.getData(key: AppCached.phone);
     String? email = pref.getData(key: AppCached.email);
-    String? userImg = pref.getData(key: AppCached.img) ?? "http";
+    String? userImg = pref.getData(key: AppCached.img) ??null;
     // String? license = pref.getData(key: AppCached.licenseImg);
     // String? form = pref.getData(key: AppCached.formImg);
     // String? car = pref.getData(key: AppCached.carImg);
@@ -147,10 +147,10 @@ class EditProfileCubit extends Cubit<EditProfileState> {
           dateBirth: "",
           img: image,
           idNumber: "",
-          carId: carModel?.id.toString()??pref.getData(key: AppCached.carId),
+          carId: carModel?.id.toString(),
           phone: phoneCtrl.text,
           cityId: cityModel?.id.toString(),
-          email: phoneCtrl.text,
+          email: emailCtrl.text,
           carImg: carImg.text.isNotEmpty ? carImg.text : null,
           formImg: formImg.text.isNotEmpty ? formImg.text : null,
           licenceImg: licenceImg.text.isNotEmpty ? licenceImg.text : null),
@@ -175,7 +175,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
         cityId: authRepository.authModel?.user?.city.id.toString(),
         cityName: authRepository.authModel?.user?.city.name,
         id: authRepository.authModel?.user?.id.toString() ?? "",
-        carId: authRepository.authModel?.user?.city.id.toString(),
+        carId: authRepository.authModel?.user?.car.id.toString(),
         carName: authRepository.authModel?.user?.car.name.toString(),
         email: authRepository.authModel?.user?.email,
       );

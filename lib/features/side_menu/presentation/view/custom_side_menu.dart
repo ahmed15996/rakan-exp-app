@@ -15,6 +15,7 @@ import 'package:rakaan/features/side_menu/presentation/cubit/side_menu_cubit.dar
 import 'package:rakaan/features/side_menu/presentation/view/widgets/custom_bottom_sheet_delete_acc.dart';
 import 'package:rakaan/features/side_menu/presentation/view/widgets/custom_bottom_sheet_log_out.dart';
 import 'package:rakaan/features/side_menu/presentation/view/widgets/custom_drawer_row.dart';
+import 'package:rakaan/features/side_menu/presentation/view/widgets/custom_language_sheet.dart';
 import 'package:rakaan/features/side_menu/presentation/view/widgets/custom_side_menu_header.dart';
 import 'package:rakaan/generated/locale_keys.g.dart';
 
@@ -66,8 +67,11 @@ class CustomSideMenu extends StatelessWidget {
                               context.pushWithNamed(Routes.staticsView);
                             },
                           ),
-                          CustomDrawerRow(title: LocaleKeys.guidelines.tr(), image: AppAssets.info, isLast: true,onTap: () {
+                          CustomDrawerRow(title: LocaleKeys.guidelines.tr(), image: AppAssets.info, onTap: () {
                             context.pushWithNamed(Routes.learnView);
+                          },),
+                          CustomDrawerRow(title: LocaleKeys.language.tr(), image: AppAssets.lang, isLast: true,onTap: () {
+                            showModalBottomSheet(context: context, builder: (context) => CustomLanguageSheet());
                           },),
                         ],
                       ),

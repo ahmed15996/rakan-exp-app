@@ -39,7 +39,7 @@ class CustomLanguageSheet extends StatelessWidget {
                     height: 3.h,
                     decoration: BoxDecoration(color: AppColors.blackColor, borderRadius: BorderRadius.circular(20.r)))
                     .center,
-                Text("LocaleKeys.changeLanguage.tr()",
+                Text(LocaleKeys.selectLang.tr(),
                     style: AppTextStyles.textStyle18.copyWith(fontWeight: FontWeight.w500, color: AppColors.blackTextColor))
                     .withPadding(top: 24.h, bottom: 32.h),
                 Row(children: [

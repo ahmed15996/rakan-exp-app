@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:rakaan/core/util/extensions/navigation.dart';
 import 'package:rakaan/core/util/extensions/on_tap.dart';
 import 'package:rakaan/core/util/extensions/padding.dart';
 import 'package:rakaan/features/trip_details/presentation/cubit/trip_details_cubit.dart';
@@ -10,16 +11,19 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../../core/constants/app_assets.dart';
 import '../../../../../core/constants/app_colors.dart';
 import '../../../../../core/constants/app_text_styles.dart';
+import '../../../../../core/util/routing/routes.dart';
+import '../../../../../core/widgets/custom_circle_icon.dart';
 import '../../../../../generated/locale_keys.g.dart';
-import '../../../../home/presentation/view/widgets/custom_delivery_item.dart';
 import '../../../../home/presentation/view/widgets/custom_timer_widget.dart';
 import 'open_id.dart';
 
 class CustomTripHeader extends StatelessWidget {
-  const CustomTripHeader({super.key, required this.cubit, required this.time});
+  const CustomTripHeader({super.key, required this.cubit, required this.time, this.onFinish});
 
   final TripDetailsCubit cubit;
-final int time;
+  final int time;
+  final void Function()? onFinish;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -30,21 +34,30 @@ final int time;
               Text(LocaleKeys.orderNumber.tr(),
                       style: AppTextStyles.textStyle12.copyWith(fontWeight: FontWeight.w500, color: AppColors.grayTextColor))
                   .withPadding(end: 2.w),
-              Text("#${cubit.model?.code??""}",
+              Text("#${cubit.model?.code ?? ""}",
                   style: AppTextStyles.textStyle12.copyWith(fontWeight: FontWeight.w500, color: AppColors.blackTextColor)),
             ],
-          ).onTap(function: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => OrderNumberScreen(orderNumber: cubit.model?.code.toString()??""),
-              ),
-            );
-          },),
-
-
-          if(cubit.model?.id!=null)
-          Expanded(child: CustomTimerWidget(model: cubit.model!, time: time,withTap:false))
+          ).onTap(
+            function: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => OrderNumberScreen(orderNumber: cubit.model?.code.toString() ?? ""),
+                ),
+              );
+            },
+          ),
+          CustomRadiusIcon(
+            size: 38.r,
+            onTap: () {
+              context.pushWithNamed(Routes.chatView);
+            },
+            backgroundColor: AppColors.whiteColor,
+            child: SvgPicture.asset(AppAssets.headphone, width: 24.r, height: 24.r),
+          ),
+          if (cubit.model?.id != null)
+            if (cubit.model?.status?.id == 1)
+              Flexible(child: CustomTimerWidget(model: cubit.model!, time: time, withTap: false, onFinish: onFinish))
         ]),
         Row(
           children: [
@@ -68,18 +81,18 @@ final int time;
                 ],
               ),
             ),
-            SvgPicture.asset(AppAssets.call,width: 60.w).onTapShadow(borderRadius: BorderRadius.circular(8.r), function: () async{
-              final Uri phoneUri = Uri(scheme: 'tel', path: cubit.model?.clint?.phone);
+            SvgPicture.asset(AppAssets.call, width: 60.w).onTapShadow(
+              borderRadius: BorderRadius.circular(8.r),
+              function: () async {
+                final Uri phoneUri = Uri(scheme: 'tel', path: cubit.model?.clint?.phone);
 
-              if (await canLaunchUrl(phoneUri)) {
-              await launchUrl(phoneUri);
-              } else {
-
-              }
-            },)
+                if (await canLaunchUrl(phoneUri)) {
+                  await launchUrl(phoneUri);
+                } else {}
+              },
+            )
           ],
         ),
-
       ],
     ).withPadding(top: 16.h);
   }

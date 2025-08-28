@@ -30,8 +30,10 @@ class SplashCubit extends Cubit<SplashState> {
             context.pushAndRemoveUntilWithNamed(Routes.selectLanguageView);
           }
         } else {
-          if (context.mounted) {
+          if (context.mounted && !((appPref.getData(key: AppCached.isFirstLogin) ?? false))) {
             context.pushAndRemoveUntilWithNamed(Routes.onBoardingView);
+          } else {
+            context.pushAndRemoveUntilWithNamed(Routes.loginView);
           }
         }
       },
