@@ -45,5 +45,24 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+        		<string>This app requires access to your current location to get nearest orders</string>
+        		<key>NSLocationWhenInUseUsageDescription</key>
+        		<string>This app requires access to your current location to get nearest orders</string>
+        		<key>NSPhotoLibraryUsageDescription</key>
+        		<string>This app requires access to the gallery to upload image to make check in to make order success</string>
+        		<key>NSCameraUsageDescription</key>
+        		<string>This app requires access to the gallery to pick image to make check in to make order success</string>
+        		<key>LSApplicationQueriesSchemes</key>
+                    		<array>
+                    			<string>http</string>
+                    			<string>https</string>
+                    			<string>tel</string>
+                    		</array>
+                    		<key>CFBundleLocalizations</key>
+                    		<array>
+                    			<string>ar</string>
+                    			<string>en</string>
+                    		</array>
 </dict>
 </plist>
