@@ -91,8 +91,8 @@ class CustomBottomSheetPayWithMoyasar extends StatelessWidget {
                 child: ApplePay(
                   config: PaymentConfig(
                     applePay: ApplePayConfig(
-                      label: context.locale.languageCode == "ar" ? "تطبيق ترست" : "Trust App",
-                      merchantId: "com.example.trust",
+                      label: context.locale.languageCode == "ar" ? "تطبيق EXP" : "EXP App",
+                      merchantId: "com.rakaan.rakaan",
                       manual: false,
                       saveCard: true
                     ),
