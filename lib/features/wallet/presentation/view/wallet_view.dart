@@ -124,8 +124,6 @@ class WalletView extends StatelessWidget {
                                                   .then(((result) {
                                                 if (result != null) {
                                                   cubit.charge(param: WalletParam(balance: cubit.balance.text, transactionId: result));
-                                                } else {
-                                                  showToast(text: "failed, try again later", state: ToastStates.error);
                                                 }
                                               }));
                                             } else {

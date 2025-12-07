@@ -65,9 +65,7 @@ class AppFirebase {
 
     try {
       // use the returned token to send messages to users from your custom server
-      String? token = await messaging.getToken(
-        vapidKey: "BGpdLRs......",
-      );
+      String? token = await messaging.getToken();
       debugPrint("firebaseToken: $token");
       return token;
     } catch (e) {

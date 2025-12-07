@@ -48,8 +48,7 @@ void main() async {
 
   // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   Bloc.observer = MyBlocObserver();
-  print("test fcm");
-  print(await FirebaseMessaging.instance.getToken());
+
   runApp(
     DevicePreview(
       enabled: false,

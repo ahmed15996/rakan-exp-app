@@ -101,7 +101,7 @@ class LoginCubit extends Cubit<LoginState> {
 
   void login({required BuildContext context}) async {
     emit(LoginLoading());
-    String fcmToken = await AppFirebase().getFirebaseToken() ?? "";
+    String fcmToken = await AppFirebase().getFirebaseToken() ?? "fcm token";
     var result = await repository.login(
       param: LoginParam(phone: phoneCtrl.text, deviceToken: fcmToken),
     );
