@@ -92,7 +92,7 @@ class CustomBottomSheetPayWithMoyasar extends StatelessWidget {
                   config: PaymentConfig(
                     applePay: ApplePayConfig(
                       label: context.locale.languageCode == "ar" ? "تطبيق EXP" : "EXP App",
-                      merchantId: "com.rakaan.rakaan",
+                      merchantId: "merchant.com.rakaan.rakaan",
                       manual: false,
                       saveCard: true
                     ),
